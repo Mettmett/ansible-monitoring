@@ -26,6 +26,12 @@
         grafana_checksum: "75de93013927db0d258984c4d74259811875739e1e364b4f2ba388823e797baa"
       include_tasks: "grafana.yml"
 
-    #- name: (sys) install Grafana Loki
-    #- name: (sys) install Prometheus
+    - name: (sys) install Prometheus
+      tags: prometheus
+      vars:
+        prometheus_version: "2.26.0"
+        prometheus_checksum: "8dd6786c338dc62728e8891c13b62eda66c7f28a01398869f2b3712895b441b9"
+      include_tasks: "prometheus.yml"
+
     #- name: (sys) install Node Exporter
+    #- name: (sys) install Grafana Loki

@@ -15,6 +15,15 @@ Little Ansible role to install a monitoring stack with Prometheus, Grafana, Node
 
 Some variables are used in the file `main.yml`.
 
+== Grafana
+
+Stock configuration, no options or tweaks used. Listen on 0.0.0.0:3000. Default user is `admin` with password `admin`.
+
+== Prometheus
+
+- listen on 0.0.0.0:9090
+- service forced to store data for 180 days (see systemd unit file in tasks/templates/prometheus.service.j2) - variable `--storage.tsdb.retention.time`
+
 == How to use it ?
 
 === Test it with molecule
