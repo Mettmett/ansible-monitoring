@@ -1,0 +1,31 @@
+---
+# tasks/main.yml
+
+- name: Install monitoring stack
+  hosts: all
+  become: true
+  tasks:
+    - name: (sys) update host apt cache
+      apt:
+        update_cache: true
+        cache_valid_time: 3600
+
+    - name: (sys) install sys tools
+      apt:
+        name: "{{ item }}"
+        state: present
+        install_recommends: false
+      loop:
+        - wget
+        - libfontconfig1
+
+    - name: (sys) install Grafana
+      tags: grafana
+      vars:
+        grafana_version: "7.5.4"
+        grafana_checksum: "75de93013927db0d258984c4d74259811875739e1e364b4f2ba388823e797baa"
+      include_tasks: "grafana.yml"
+
+    #- name: (sys) install Grafana Loki
+    #- name: (sys) install Prometheus
+    #- name: (sys) install Node Exporter

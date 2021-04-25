@@ -1,0 +1,37 @@
+---
+
+    - name: (sys) update host apt cache
+      apt:
+        update_cache: true
+        cache_valid_time: 3600
+
+    - name: (sys) install sys tools
+      apt:
+        name: "{{ item }}"
+        state: present
+        install_recommends: false
+      loop:
+        - wget
+        - libfontconfig1
+
+    - name: (sys) download grafana deb with check (sha256)
+      get_url:
+        url: https://dl.grafana.com/oss/release/grafana_{{ grafana_version }}_amd64.deb
+        dest: /tmp/grafana_{{ grafana_version }}_amd64.deb
+        checksum: sha256:{{ grafana_checksum }}
+
+    - name: (sys) install grafana .deb package
+      apt:
+        deb: /tmp/grafana_{{ grafana_version }}_amd64.deb
+
+    - name: (sys) enabling grafana-server systemd unit file
+      systemd:
+        name: "grafana-server"
+        enabled: true
+        masked: false
+
+    - name: (sys) start grafana-server to the moon
+      systemd:
+        name: "grafana-server"
+        state: restarted
+        daemon_reload: true
