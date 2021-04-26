@@ -1,0 +1,17 @@
+{{ ansible_managed | comment }}
+
+[Unit]
+Description=Node_Exporter Daemon
+Documentation=https://prometheus.io/docs/guides/node-exporter/
+After=network-online.target
+
+[Service]
+User=node_exporter
+Group=node_exporter
+ExecReload=/bin/kill -HUP $MAINPID
+ExecStart=/usr/local/bin/node_exporter
+
+SyslogIdentifier=node_exporter
+
+[Install]
+WantedBy=multi-user.target

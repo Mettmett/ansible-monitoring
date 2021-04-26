@@ -33,5 +33,11 @@
         prometheus_checksum: "8dd6786c338dc62728e8891c13b62eda66c7f28a01398869f2b3712895b441b9"
       include_tasks: "prometheus.yml"
 
-    #- name: (sys) install Node Exporter
+    - name: (sys) install node_exporter
+      tags: node_exporter
+      vars:
+        node_exporter_version: "1.1.2"
+        node_exporter_checksum: "8c1f6a317457a658e0ae68ad710f6b4098db2cad10204649b51e3c043aa3e70d"
+      include_tasks: "node_exporter.yml"
+
     #- name: (sys) install Grafana Loki
