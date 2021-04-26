@@ -2,7 +2,7 @@
 
 == Goals
 
-Little Ansible role to install a monitoring stack with Prometheus, Grafana, Node-Exporter, Telegraf and InfluxDB.
+Little Ansible role to install a monitoring stack with Prometheus, Grafana, Node-Exporter, Loki (with promtail), Telegraf and InfluxDB.
 
 == What remains to be done ?
 
@@ -19,10 +19,20 @@ Some variables are used in the file `main.yml`.
 
 Stock configuration, no options or tweaks used. Listen on 0.0.0.0:3000. Default user is `admin` with password `admin`.
 
+- auto-provisionning of datasources (prometheus and loki, installed locally)
+
 == Prometheus
 
 - listen on 0.0.0.0:9090
 - service forced to store data for 180 days (see systemd unit file in tasks/templates/prometheus.service.j2) - variable `--storage.tsdb.retention.time`
+
+== Node_Exporter
+
+Have some metrics easily of your host with this package. No tweaks, simple use.
+
+== Loki and Promtail
+
+Used to view logs into Grafana. Default configuration used.
 
 == How to use it ?
 
