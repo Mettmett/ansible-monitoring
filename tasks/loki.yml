@@ -1,0 +1,111 @@
+---
+
+    - name: (sys) update host apt cache
+      apt:
+        update_cache: true
+        cache_valid_time: 3600
+
+    - name: (sys) install sys tools
+      apt:
+        name: "{{ item }}"
+        state: present
+        install_recommends: false
+      loop:
+        - unzip 
+
+    - name: (sys) create loki system group
+      group:
+        name: "loki"
+        system: "true"
+        state: present
+
+    - name: (sys) create loki system user
+      user:
+        name: "loki"
+        system: "true"
+        shell: "/usr/sbin/nologin"
+        group: "loki"
+        createhome: "false"
+        home: "/etc/loki"
+
+    - name: (build) create a folder to stock loki and promtail conf files
+      file:
+        path: "/etc/loki"
+        state: directory
+        mode: "0755"
+        owner: "loki"
+        group: "loki"
+
+    - name: (sys) download loki sources (.zip)
+      unarchive:
+        remote_src: yes
+        src: https://github.com/grafana/loki/releases/download/v{{ loki_version }}/loki-linux-amd64.zip
+        dest: /usr/local/bin
+
+    - name: (sys) download promtail sources (.zip)
+      unarchive:
+        remote_src: yes
+        src: https://github.com/grafana/loki/releases/download/v{{ promtail_version }}/promtail-linux-amd64.zip
+        dest: /usr/local/bin
+
+    - name: (sys) change loki ownership and group
+      file:
+        path: /usr/local/bin/loki-linux-amd64
+        owner: loki
+        group: loki
+
+    - name: (sys) change promtail ownership and group
+      file:
+        path: /usr/local/bin/promtail-linux-amd64
+        owner: loki
+        group: loki
+
+    - name: (build) installing custom conf file for loki
+      template:
+        src: "loki-config.yml.j2"
+        dest: "/etc/loki/loki-config.yml"
+        owner: "loki"
+        group: "loki"
+        mode: "644"
+
+    - name: (build) installing custom conf file for promtail
+      template:
+        src: "promtail-config.yml.j2"
+        dest: "/etc/loki/promtail-config.yml"
+        owner: "loki"
+        group: "loki"
+        mode: "644"
+
+    - name: (build) installing loki systemd unit
+      template:
+        src: "loki.service.j2"
+        dest: "/lib/systemd/system/loki.service"
+        owner: "root"
+        group: "root"
+        mode: "644"
+
+    - name: (build) installing promtail systemd unit
+      template:
+        src: "promtail.service.j2"
+        dest: "/lib/systemd/system/promtail.service"
+        owner: "root"
+        group: "root"
+        mode: "644"
+
+    - name: (sys) enabling loki and promtail systemd unit file
+      systemd:
+        name: "{{ item }}"
+        enabled: true
+        masked: false
+      loop:
+        - loki
+        - promtail
+
+    - name: (sys) start loki and promtail to the moon
+      systemd:
+        name: "{{ item }}"
+        state: restarted
+        daemon_reload: true
+      loop:
+        - loki
+        - promtail

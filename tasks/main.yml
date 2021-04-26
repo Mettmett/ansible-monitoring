@@ -40,4 +40,9 @@
         node_exporter_checksum: "8c1f6a317457a658e0ae68ad710f6b4098db2cad10204649b51e3c043aa3e70d"
       include_tasks: "node_exporter.yml"
 
-    #- name: (sys) install Grafana Loki
+    - name: (sys) install Loki
+      tags: loki
+      vars:
+        loki_version: "2.2.1"
+        promtail_version: "2.2.1"
+      include_tasks: "loki.yml"

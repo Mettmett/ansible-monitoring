@@ -1,0 +1,17 @@
+{{ ansible_managed | comment }}
+
+[Unit]
+Description=Loki
+Documentation=https://grafana.com/docs/loki/latest/
+After=network-online.target
+
+[Service]
+User=loki
+Group=loki
+ExecReload=/bin/kill -HUP $MAINPID
+ExecStart=/usr/local/bin/loki-linux-amd64 -config.file=/etc/loki/loki-config.yml
+
+SyslogIdentifier=loki
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,17 @@
+{{ ansible_managed | comment }}
+
+[Unit]
+Description=Promtail
+Documentation=https://grafana.com/docs/loki/latest/
+After=network-online.target
+
+[Service]
+User=loki
+Group=loki
+ExecReload=/bin/kill -HUP $MAINPID
+ExecStart=/usr/local/bin/promtail-linux-amd64 -config.file=/etc/loki/promtail-config.yml
+
+SyslogIdentifier=promtail
+
+[Install]
+WantedBy=multi-user.target
