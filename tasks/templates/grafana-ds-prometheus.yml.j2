@@ -1,0 +1,15 @@
+---
+{{ ansible_managed | comment }}
+
+apiVersion: 1
+
+datasources:
+  - name: 'Prometheus'
+    type: 'prometheus'
+    id: 'prometheus'
+    access: 'server'
+    org_id: 1
+    url: 'http://localhost:9090'
+    is_default: true
+    version: 1
+    editable: true

@@ -24,6 +24,22 @@
       apt:
         deb: /tmp/grafana_{{ grafana_version }}_amd64.deb
 
+    - name: (sys) installing grafana custom datasources configuration file
+      template:
+        src: "grafana-ds-prometheus.yml.j2"
+        dest: "/etc/grafana/provisioning/datasources/grafana-ds-prometheus.yml"
+        owner: "grafana"
+        group: "grafana"
+        mode: "644"
+
+    - name: (sys) installing custom grafana configuration file
+      template:
+        src: "grafana.ini.j2"
+        dest: "/etc/grafana/grafana.ini"
+        owner: "grafana"
+        group: "grafana"
+        mode: "644"
+
     - name: (sys) enabling grafana-server systemd unit file
       systemd:
         name: "grafana-server"
