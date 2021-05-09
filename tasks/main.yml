@@ -1,48 +1,28 @@
 ---
 # tasks/main.yml
+  
+- name: (sys) update host apt cache
+  apt:
+    update_cache: true
+    cache_valid_time: 3600
 
-- name: Install monitoring stack
-  hosts: all
-  become: true
-  tasks:
-    - name: (sys) update host apt cache
-      apt:
-        update_cache: true
-        cache_valid_time: 3600
+- name: (sys) install sys tools
+  apt:
+    name: "{{ item }}"
+    state: present
+    install_recommends: false
+  loop:
+    - wget
+    - libfontconfig1
 
-    - name: (sys) install sys tools
-      apt:
-        name: "{{ item }}"
-        state: present
-        install_recommends: false
-      loop:
-        - wget
-        - libfontconfig1
+- name: (sys) install Grafana
+  include_tasks: "grafana.yml"
 
-    - name: (sys) install Grafana
-      tags: grafana
-      vars:
-        grafana_version: "7.5.4"
-        grafana_checksum: "75de93013927db0d258984c4d74259811875739e1e364b4f2ba388823e797baa"
-      include_tasks: "grafana.yml"
+- name: (sys) install Prometheus
+  include_tasks: "prometheus.yml"
 
-    - name: (sys) install Prometheus
-      tags: prometheus
-      vars:
-        prometheus_version: "2.26.0"
-        prometheus_checksum: "8dd6786c338dc62728e8891c13b62eda66c7f28a01398869f2b3712895b441b9"
-      include_tasks: "prometheus.yml"
+- name: (sys) install node_exporter
+  include_tasks: "node_exporter.yml"
 
-    - name: (sys) install node_exporter
-      tags: node_exporter
-      vars:
-        node_exporter_version: "1.1.2"
-        node_exporter_checksum: "8c1f6a317457a658e0ae68ad710f6b4098db2cad10204649b51e3c043aa3e70d"
-      include_tasks: "node_exporter.yml"
-
-    - name: (sys) install Loki
-      tags: loki
-      vars:
-        loki_version: "2.2.1"
-        promtail_version: "2.2.1"
-      include_tasks: "loki.yml"
+- name: (sys) install Loki
+  include_tasks: "loki.yml"
