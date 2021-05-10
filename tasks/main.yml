@@ -26,3 +26,6 @@
 
 - name: (sys) install Loki
   include_tasks: "loki.yml"
+
+- name: (sys) install blackbox_exporter
+  include_tasks: "blackbox.yml"
