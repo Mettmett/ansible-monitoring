@@ -1,0 +1,18 @@
+{{ ansible_managed | comment }}
+
+[Unit]
+Description=Blackbox_Exporter Daemon
+Documentation=https://github.com/prometheus/blackbox_exporter
+After=network-online.target
+
+[Service]
+User=blackbox_exporter
+Group=blackbox_exporter
+ExecReload=/bin/kill -HUP $MAINPID
+ExecStart=/usr/local/bin/blackbox_exporter \
+    --config.file=/etc/blackbox_exporter/blackbox.yml
+
+SyslogIdentifier=blackbox_exporter
+
+[Install]
+WantedBy=multi-user.target
