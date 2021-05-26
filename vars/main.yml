@@ -1,12 +1,12 @@
 ---
 
 # specific grafana
-grafana_version: "7.5.4"
-grafana_checksum: "75de93013927db0d258984c4d74259811875739e1e364b4f2ba388823e797baa"
+grafana_version: "7.5.7"
+grafana_checksum: "f98d7b75fd269414233e8a0e751e0dcf7d687e576220a86df570b78ef3d798ce"
 
 # specific prometheus
-prometheus_version: "2.26.0"
-prometheus_checksum: "8dd6786c338dc62728e8891c13b62eda66c7f28a01398869f2b3712895b441b9"
+prometheus_version: "2.27.1"
+prometheus_checksum: "ce637d0167d5e6d2561f3bd37e1c58fe8601e13e4e1ea745653c068f6e1317ae"
 
 # specific node_exporter
 node_exporter_version: "1.1.2"
@@ -17,5 +17,5 @@ loki_version: "2.2.1"
 promtail_version: "2.2.1"
 
 # specific blackbox_exporter
-blackbox_exporter_version: "0.18.0"
-blackbox_exporter_checksum: "a87f9530e31e2b20d03a6d941f6f051c57ee724f24b38f2615b8580ca63966dc"
+blackbox_exporter_version: "0.19.0"
+blackbox_exporter_checksum: "af2ae1394c4f9b46962ac1510e1dacac78115c11e625991fb6c54825d2240896"
