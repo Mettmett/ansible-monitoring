@@ -55,8 +55,8 @@
       template:
         src: "node_exporter.service.j2"
         dest: "/lib/systemd/system/node_exporter.service"
-        owner: "root"
-        group: "root"
+        owner: "node_exporter"
+        group: "node_exporter"
         mode: "644"
 
     - name: (sys) enabling node_exporter systemd unit file

@@ -79,8 +79,8 @@
       template:
         src: "blackbox_exporter.service.j2"
         dest: "/lib/systemd/system/blackbox_exporter.service"
-        owner: "root"
-        group: "root"
+        owner: "blackbox_exporter"
+        group: "blackbox_exporter"
         mode: "644"
 
     - name: (sys) enabling blackbox_exporter systemd unit file

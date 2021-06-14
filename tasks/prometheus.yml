@@ -96,8 +96,8 @@
       template:
         src: "prometheus.service.j2"
         dest: "/lib/systemd/system/prometheus.service"
-        owner: "root"
-        group: "root"
+        owner: "prometheus"
+        group: "prometheus"
         mode: "644"
 
     - name: (sys) enabling prometheus systemd unit file

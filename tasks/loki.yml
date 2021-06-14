@@ -80,16 +80,16 @@
       template:
         src: "loki.service.j2"
         dest: "/lib/systemd/system/loki.service"
-        owner: "root"
-        group: "root"
+        owner: "loki"
+        group: "loki"
         mode: "644"
 
     - name: (build) installing promtail systemd unit
       template:
         src: "promtail.service.j2"
         dest: "/lib/systemd/system/promtail.service"
-        owner: "root"
-        group: "root"
+        owner: "loki"
+        group: "loki"
         mode: "644"
 
     - name: (sys) enabling loki and promtail systemd unit file
