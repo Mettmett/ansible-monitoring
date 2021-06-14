@@ -1,0 +1,11 @@
+---
+    - name: (sys) download influxdb deb with check (sha256)
+      get_url:
+        url: https://dl.influxdata.com/influxdb/releases/influxdb{{ influxdb_version }}-amd64.deb
+        dest: /tmp/influxdb{{ influxdb_version }}_amd64.deb
+        checksum: sha256:{{ influxdb_sha256 }}
+
+    - name: (sys) install influxdb .deb package
+      apt:
+        deb: /tmp/influxdb{{ influxdb_version }}_amd64.deb
+

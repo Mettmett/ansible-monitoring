@@ -15,6 +15,9 @@
     - wget
     - libfontconfig1
 
+- name: (sys) install InfluxDB
+  include_tasks: "influxdb.yml"
+
 - name: (sys) install Grafana
   include_tasks: "grafana.yml"
 
