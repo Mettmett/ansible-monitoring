@@ -40,6 +40,13 @@
         group: "grafana"
         mode: "644"
 
+    - name: (sys) change file ownership group and permissions of systemd unit
+      file:
+        path: /lib/systemd/system/grafana-server.service
+        owner: "grafana"
+        group: "grafana"
+        mode: "0644"
+
     - name: (sys) enabling grafana-server systemd unit file
       systemd:
         name: "grafana-server"
