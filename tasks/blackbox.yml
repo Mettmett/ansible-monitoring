@@ -8,7 +8,7 @@
       get_url:
         url: https://github.com/prometheus/blackbox_exporter/releases/download/v{{ blackbox_exporter_version }}/blackbox_exporter-{{ blackbox_exporter_version }}.linux-amd64.tar.gz
         dest: /tmp/blackbox_exporter-{{ blackbox_exporter_version }}.linux-amd64.tar.gz
-        checksum: sha256:{{ blackbox_exporter_checksum }}
+        checksum: sha256:{{ blackbox_exporter_sha256 }}
       register: blackbox_exporter_source
 
     - name: (build) create a temp folder for blackbox_exporter sources

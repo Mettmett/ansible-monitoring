@@ -18,7 +18,7 @@
       get_url:
         url: https://dl.grafana.com/oss/release/grafana_{{ grafana_version }}_amd64.deb
         dest: /tmp/grafana_{{ grafana_version }}_amd64.deb
-        checksum: sha256:{{ grafana_checksum }}
+        checksum: sha256:{{ grafana_sha256 }}
 
     - name: (sys) install grafana .deb package
       apt:

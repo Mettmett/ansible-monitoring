@@ -2,15 +2,15 @@
 
 # specific grafana
 grafana_version: "7.5.7"
-grafana_checksum: "f98d7b75fd269414233e8a0e751e0dcf7d687e576220a86df570b78ef3d798ce"
+grafana_sha256: "f98d7b75fd269414233e8a0e751e0dcf7d687e576220a86df570b78ef3d798ce"
 
 # specific prometheus
 prometheus_version: "2.27.1"
-prometheus_checksum: "ce637d0167d5e6d2561f3bd37e1c58fe8601e13e4e1ea745653c068f6e1317ae"
+prometheus_sha256: "ce637d0167d5e6d2561f3bd37e1c58fe8601e13e4e1ea745653c068f6e1317ae"
 
 # specific node_exporter
 node_exporter_version: "1.1.2"
-node_exporter_checksum: "8c1f6a317457a658e0ae68ad710f6b4098db2cad10204649b51e3c043aa3e70d"
+node_exporter_sha256: "8c1f6a317457a658e0ae68ad710f6b4098db2cad10204649b51e3c043aa3e70d"
 
 # specific loki
 loki_version: "2.2.1"
@@ -18,4 +18,4 @@ promtail_version: "2.2.1"
 
 # specific blackbox_exporter
 blackbox_exporter_version: "0.19.0"
-blackbox_exporter_checksum: "af2ae1394c4f9b46962ac1510e1dacac78115c11e625991fb6c54825d2240896"
+blackbox_exporter_sha256: "af2ae1394c4f9b46962ac1510e1dacac78115c11e625991fb6c54825d2240896"

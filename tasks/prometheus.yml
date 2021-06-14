@@ -10,7 +10,7 @@
       get_url:
         url: https://github.com/prometheus/prometheus/releases/download/v{{ prometheus_version }}/prometheus-{{ prometheus_version }}.linux-amd64.tar.gz
         dest: /tmp/prometheus-{{ prometheus_version }}.linux-amd64.tar.gz
-        checksum: sha256:{{ prometheus_checksum }}
+        checksum: sha256:{{ prometheus_sha256 }}
       register: prometheus_source
 
     - name: (build) create a temp folder for prometheus sources
