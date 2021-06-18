@@ -1,60 +1,60 @@
 ---
 
-    - name: (sys) update host apt cache
-      apt:
-        update_cache: true
-        cache_valid_time: 3600
+- name: (sys) update host apt cache
+  apt:
+    update_cache: true
+    cache_valid_time: 3600
 
-    - name: (sys) install sys tools
-      apt:
-        name: "{{ item }}"
-        state: present
-        install_recommends: false
-      loop:
-        - wget
-        - libfontconfig1
+- name: (sys) install sys tools
+  apt:
+    name: "{{ item }}"
+    state: present
+    install_recommends: false
+  loop:
+    - wget
+    - libfontconfig1
 
-    - name: (sys) download grafana deb with check (sha256)
-      get_url:
-        url: https://dl.grafana.com/oss/release/grafana_{{ grafana_version }}_amd64.deb
-        dest: /tmp/grafana_{{ grafana_version }}_amd64.deb
-        checksum: sha256:{{ grafana_sha256 }}
+- name: (sys) download grafana deb with check (sha256)
+  get_url:
+    url: https://dl.grafana.com/oss/release/grafana_{{ grafana_version }}_amd64.deb
+    dest: /tmp/grafana_{{ grafana_version }}_amd64.deb
+    checksum: sha256:{{ grafana_sha256 }}
 
-    - name: (sys) install grafana .deb package
-      apt:
-        deb: /tmp/grafana_{{ grafana_version }}_amd64.deb
+- name: (sys) install grafana .deb package
+  apt:
+    deb: /tmp/grafana_{{ grafana_version }}_amd64.deb
 
-    - name: (sys) installing grafana custom datasources configuration file
-      template:
-        src: "grafana-ds-prometheus.yml.j2"
-        dest: "/etc/grafana/provisioning/datasources/grafana-ds-prometheus.yml"
-        owner: "grafana"
-        group: "grafana"
-        mode: "644"
+- name: (sys) installing grafana custom datasources configuration file
+  template:
+    src: "grafana-ds-prometheus.yml.j2"
+    dest: "/etc/grafana/provisioning/datasources/grafana-ds-prometheus.yml"
+    owner: "grafana"
+    group: "grafana"
+    mode: "644"
 
-    - name: (sys) installing custom grafana configuration file
-      template:
-        src: "grafana.ini.j2"
-        dest: "/etc/grafana/grafana.ini"
-        owner: "grafana"
-        group: "grafana"
-        mode: "644"
+- name: (sys) installing custom grafana configuration file
+  template:
+    src: "grafana.ini.j2"
+    dest: "/etc/grafana/grafana.ini"
+    owner: "grafana"
+    group: "grafana"
+    mode: "644"
 
-    - name: (sys) change file ownership group and permissions of systemd unit
-      file:
-        path: /lib/systemd/system/grafana-server.service
-        owner: "grafana"
-        group: "grafana"
-        mode: "0644"
+- name: (sys) change file ownership group and permissions of systemd unit
+  file:
+    path: /lib/systemd/system/grafana-server.service
+    owner: "grafana"
+    group: "grafana"
+    mode: "0644"
 
-    - name: (sys) enabling grafana-server systemd unit file
-      systemd:
-        name: "grafana-server"
-        enabled: true
-        masked: false
+- name: (sys) enabling grafana-server systemd unit file
+  systemd:
+    name: "grafana-server"
+    enabled: true
+    masked: false
 
-    - name: (sys) start grafana-server to the moon
-      systemd:
-        name: "grafana-server"
-        state: restarted
-        daemon_reload: true
+- name: (sys) start grafana-server to the moon
+  systemd:
+    name: "grafana-server"
+    state: restarted
+    daemon_reload: true

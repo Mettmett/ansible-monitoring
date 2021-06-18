@@ -2,7 +2,7 @@
 
 galaxy_info:
   author: Julien HOMMET
-  description: Ansible role to install a monitoring stack with Prometheus, Grafana, Node-Exporter, Telegraf and InfluxDB.
+  description: Role to install a monitoring stack with Prometheus, Grafana, NodeExporter, BlackboxExporter and InfluxDB.
   license: CC BY-NC-ND
 
   min_ansible_version: 2.9
