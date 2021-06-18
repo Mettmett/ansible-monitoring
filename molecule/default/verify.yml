@@ -2,4 +2,54 @@
 
 - name: Verify
   hosts: all
-# TODO
+  become: true
+  tasks:
+  - name: (check) Test if services are started and enabled
+    systemd:
+      name: "{{ item }}"
+      state: started
+      enabled: true
+    loop:
+      - node_exporter.service
+      - influxdb.service
+      - grafana-server.service
+      - prometheus.service
+      - blackbox_exporter.service
+      - loki.service
+      - promtail.service
+
+  - name: (check) Test if services ports are open and reachable
+    shell: "ss -ntlp | grep {{ item }}"
+    loop:
+      - 3000
+      - 8086
+      - 9080
+      - 9090
+      - 9100
+      - 9115
+    changed_when: false
+
+  - name: (check) Test if Prometheus web interface is OK
+    uri:
+      url: "http://localhost:9090/status"
+      status_code: 200
+
+  - name: (check) Test if Grafana web interface is OK
+    uri:
+      url: "http://localhost:3000"
+      status_code: 200
+
+  - name: (check) Test if node_exporter metrics is OK
+    uri:
+      url: "http://localhost:9100/metrics"
+      status_code: 200
+
+  - name: (check) Test if blackbox_exporter metrics is OK
+    uri:
+      url: "http://localhost:9115/metrics"
+      status_code: 200
+
+  - name: (check) Test if promtail web interface is OK
+    uri:
+      url: "http://localhost:9080/targets"
+      status_code: 200
