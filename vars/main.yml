@@ -5,8 +5,8 @@ influxdb_version: "2.0.7"
 influxdb_sha256: "21ca5fb21b1c83a345e894f60eddaaeee254e60cd83ff7f01c0b7d7348d83779"
 
 # specific grafana
-grafana_version: "7.5.7"
-grafana_sha256: "f98d7b75fd269414233e8a0e751e0dcf7d687e576220a86df570b78ef3d798ce"
+grafana_version: "8.0.3"
+grafana_sha256: "e2c3967007343d90d9d5a7fdb160c4b11150302097029eb143e64def9d7528d1"
 
 # specific prometheus
 prometheus_version: "2.27.1"
