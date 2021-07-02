@@ -32,3 +32,6 @@
 
 - name: (sys) install blackbox_exporter
   include_tasks: "blackbox.yml"
+
+- name: (sys) install nginx-exporter
+  include_tasks: "nginx_exporter.yml"

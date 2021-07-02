@@ -1,0 +1,18 @@
+{{ ansible_managed | comment }}
+
+[Unit]
+Description=nginx-prometheus-exporter Daemon
+Documentation=https://github.com/nginxinc/nginx-prometheus-exporter
+After=network-online.target
+
+[Service]
+User=nginx_exporter
+Group=nginx_exporter
+ExecReload=/bin/kill -HUP $MAINPID
+ExecStart=/usr/local/bin/nginx_exporter \
+    -nginx.scrape-uri=http://localhost:81/stub_status
+
+SyslogIdentifier=nginx_exporter
+
+[Install]
+WantedBy=multi-user.target
