@@ -5,12 +5,12 @@ influxdb_version: "2.0.7"
 influxdb_sha256: "21ca5fb21b1c83a345e894f60eddaaeee254e60cd83ff7f01c0b7d7348d83779"
 
 # specific grafana
-grafana_version: "8.0.3"
-grafana_sha256: "e2c3967007343d90d9d5a7fdb160c4b11150302097029eb143e64def9d7528d1"
+grafana_version: "8.0.5"
+grafana_sha256: "b89ec6c0838f7ec4d8a61554cb7582f49690a0c560d607b7c652c4cf0d510ffa"
 
 # specific prometheus
-prometheus_version: "2.27.1"
-prometheus_sha256: "ce637d0167d5e6d2561f3bd37e1c58fe8601e13e4e1ea745653c068f6e1317ae"
+prometheus_version: "2.28.1"
+prometheus_sha256: "91dd91e13f30fe520e01175ca1027dd09a458d4421a584ba557ba88b38803f27"
 
 # specific node_exporter
 node_exporter_version: "1.1.2"
