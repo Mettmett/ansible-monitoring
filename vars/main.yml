@@ -27,3 +27,7 @@ blackbox_exporter_sha256: "af2ae1394c4f9b46962ac1510e1dacac78115c11e625991fb6c54
 # specific nginx_exporter
 nginx_exporter_version: "0.9.0"
 nginx_exporter_sha256: "469851e5705a83e9bba9eb402a7484d196293826470f4f66b1d2a4a1074b6599"
+
+# specific sql_exporter
+mysqld_exporter_version: "0.13.0"
+mysqld_exporter_sha256: "626584c5d1c0cf09982302763e69db24fabe5dc736e7b694a3f8fdfee3d8d9a2"

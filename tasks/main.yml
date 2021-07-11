@@ -35,3 +35,6 @@
 
 - name: (sys) install nginx-exporter
   include_tasks: "nginx_exporter.yml"
+
+- name: (sys) install mysql-exporter
+  include_tasks: "mysqld_exporter.yml"

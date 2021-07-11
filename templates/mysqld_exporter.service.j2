@@ -1,0 +1,17 @@
+{{ ansible_managed | comment }}
+
+[Unit]
+Description=MySQLd exporter Daemon
+Documentation=https://github.com/prometheus/mysqld_exporter
+After=network-online.target
+
+[Service]
+User=mysqld_exporter
+Group=mysqld_exporter
+ExecReload=/bin/kill -HUP $MAINPID
+ExecStart=/usr/local/bin/mysqld_exporter
+
+SyslogIdentifier=mysqld_exporter
+
+[Install]
+WantedBy=multi-user.target
