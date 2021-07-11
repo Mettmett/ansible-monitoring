@@ -8,8 +8,33 @@ After=network-online.target
 [Service]
 User=mysqld_exporter
 Group=mysqld_exporter
+Environment=DATA_SOURCE_NAME='export:pouetpouet@(localhost:3306)/'
 ExecReload=/bin/kill -HUP $MAINPID
-ExecStart=/usr/local/bin/mysqld_exporter
+ExecStart=/usr/local/bin/mysqld_exporter \
+    --collect.auto_increment.columns \
+    --collect.binlog_size \
+    --collect.engine_innodb_status \
+    --collect.global_status \
+    --collect.global_variables \
+    --collect.info_schema.innodb_metrics \
+    --collect.info_schema.innodb_tablespaces \
+    --collect.info_schema.innodb_cmp \
+    --collect.info_schema.innodb_cmpmem \
+    --collect.info_schema.processlist \
+    --collect.info_schema.processlist.min_time 0 \
+    --collect.info_schema.query_response_time \
+    --collect.info_schema.tables \
+    --collect.info_schema.tables.databases * \
+    --collect.info_schema.tablestats \
+    --collect.info_schema.schemastats \
+    --collect.mysql.user \
+    --collect.perf_schema.eventsstatements \
+    --collect.perf_schema.eventswaits \
+    --collect.perf_schema.file_events \
+    --collect.perf_schema.file_instances \
+    --collect.perf_schema.indexiowaits \
+    --collect.perf_schema.tableiowaits \
+    --collect.perf_schema.tablelocks
 
 SyslogIdentifier=mysqld_exporter
 
