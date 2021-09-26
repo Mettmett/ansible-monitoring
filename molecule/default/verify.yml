@@ -10,12 +10,12 @@
       state: started
       enabled: true
     loop:
-      - node_exporter.service
-      - influxdb.service
-      - grafana-server.service
-      - prometheus.service
       - blackbox_exporter.service
+      - grafana-server.service
+      - influxdb.service
       - loki.service
+      - node_exporter.service
+      - prometheus.service
       - promtail.service
 
   - name: (check) Test if services ports are open and reachable
