@@ -31,15 +31,4 @@
     owner: "influxdb"
     group: "influxdb"
     mode: "644"
-
-- name: (sys) enabling influxdb systemd unit file
-  systemd:
-    name: "influxdb"
-    enabled: true
-    masked: false
-
-- name: (sys) start influxdb to the moon
-  systemd:
-    name: "influxdb"
-    state: restarted
-    daemon_reload: true
+    notify: start influxdb

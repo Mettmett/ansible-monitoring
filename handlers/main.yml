@@ -15,6 +15,14 @@
     name: "grafana-server"
     state: started
 
+- name: start influxdb
+  systemd:
+    daemon_reload: true
+    enabled: true
+    masked: false
+    name: "influxdb"
+    state: started
+
 - name: start prometheus
   systemd:
     daemon_reload: true
