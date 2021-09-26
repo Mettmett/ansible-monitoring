@@ -1,18 +1,33 @@
 {{ ansible_managed | comment }}
 
 [Unit]
+After=network-online.target
 Description=InfluxDB is an open-source, distributed, time series database
 Documentation=https://docs.influxdata.com/influxdb/
-After=network-online.target
 
 [Service]
-User=influxdb
-Group=influxdb
-LimitNOFILE=65536
 EnvironmentFile=-/etc/default/influxdb2
 ExecStart=/usr/bin/influxd
+Group=influxdb
 KillMode=control-group
+LimitNOFILE=65536
 Restart=on-failure
+Type=simple
+User=influxdb
+
+## hardening
+# more info at https://gist.github.com/ageis/f5595e59b1cddb1513d1b425a323db04 & https://www.freedesktop.org/software/systemd/man/systemd.exec.html
+MemoryDenyWriteExecute=true
+NoNewPrivileges=true
+PrivateDevices=true
+PrivateTmp=true
+ProtectControlGroups=true
+ProtectHome=read-only
+ProtectKernelModules=true
+ProtectKernelTunables=true
+RestrictNamespaces=true
+RestrictRealtime=true
+RestrictSUIDSGID=true
 
 [Install]
 WantedBy=multi-user.target

@@ -1,18 +1,34 @@
 {{ ansible_managed | comment }}
 
 [Unit]
+After=network-online.target
 Description=nginx-prometheus-exporter Daemon
 Documentation=https://github.com/nginxinc/nginx-prometheus-exporter
-After=network-online.target
 
 [Service]
-User=nginx_exporter
-Group=nginx_exporter
 ExecReload=/bin/kill -HUP $MAINPID
 ExecStart=/usr/local/bin/nginx-prometheus-exporter \
     -nginx.scrape-uri=http://localhost:81/stub_status
-
+Group=nginx_exporter
+Restart=on-failure
 SyslogIdentifier=nginx_exporter
+Type=simple
+User=nginx_exporter
+
+## hardening
+# more info at https://gist.github.com/ageis/f5595e59b1cddb1513d1b425a323db04 & https://www.freedesktop.org/software/systemd/man/systemd.exec.html
+MemoryDenyWriteExecute=true
+NoNewPrivileges=true
+PrivateDevices=true
+PrivateTmp=true
+ProtectControlGroups=true
+ProtectHome=read-only
+ProtectKernelModules=true
+ProtectKernelTunables=true
+ProtectSystem=strict
+RestrictNamespaces=true
+RestrictRealtime=true
+RestrictSUIDSGID=true
 
 [Install]
 WantedBy=multi-user.target

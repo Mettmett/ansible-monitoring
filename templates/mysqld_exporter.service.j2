@@ -1,13 +1,11 @@
 {{ ansible_managed | comment }}
 
 [Unit]
+After=network-online.target
 Description=MySQLd exporter Daemon
 Documentation=https://github.com/prometheus/mysqld_exporter
-After=network-online.target
 
 [Service]
-User=mysqld_exporter
-Group=mysqld_exporter
 Environment=DATA_SOURCE_NAME='export:pouetpouet@(localhost:3306)/'
 ExecReload=/bin/kill -HUP $MAINPID
 ExecStart=/usr/local/bin/mysqld_exporter \
@@ -34,8 +32,26 @@ ExecStart=/usr/local/bin/mysqld_exporter \
     --collect.perf_schema.indexiowaits \
     --collect.perf_schema.tableiowaits \
     --collect.perf_schema.tablelocks
-
+Group=mysqld_exporter
+Restart=on-failure
 SyslogIdentifier=mysqld_exporter
+Type=simple
+User=mysqld_exporter
+
+## hardening
+# more info at https://gist.github.com/ageis/f5595e59b1cddb1513d1b425a323db04 & https://www.freedesktop.org/software/systemd/man/systemd.exec.html
+MemoryDenyWriteExecute=true
+NoNewPrivileges=true
+PrivateDevices=true
+PrivateTmp=true
+ProtectControlGroups=true
+ProtectHome=read-only
+ProtectKernelModules=true
+ProtectKernelTunables=true
+ProtectSystem=strict
+RestrictNamespaces=true
+RestrictRealtime=true
+RestrictSUIDSGID=true
 
 [Install]
 WantedBy=multi-user.target

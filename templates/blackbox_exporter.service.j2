@@ -1,18 +1,34 @@
 {{ ansible_managed | comment }}
 
 [Unit]
+After=network-online.target
 Description=Blackbox_Exporter Daemon
 Documentation=https://github.com/prometheus/blackbox_exporter
-After=network-online.target
 
 [Service]
-User=blackbox_exporter
-Group=blackbox_exporter
 ExecReload=/bin/kill -HUP $MAINPID
 ExecStart=/usr/local/bin/blackbox_exporter \
     --config.file=/etc/blackbox_exporter/blackbox.yml
-
+Group=blackbox_exporter
+Restart=on-failure
 SyslogIdentifier=blackbox_exporter
+Type=simple
+User=blackbox_exporter
+
+## hardening
+# more info at https://gist.github.com/ageis/f5595e59b1cddb1513d1b425a323db04 & https://www.freedesktop.org/software/systemd/man/systemd.exec.html
+MemoryDenyWriteExecute=true
+NoNewPrivileges=true
+PrivateDevices=true
+PrivateTmp=true
+ProtectControlGroups=true
+ProtectHome=read-only
+ProtectKernelModules=true
+ProtectKernelTunables=true
+ProtectSystem=strict
+RestrictNamespaces=true
+RestrictRealtime=true
+RestrictSUIDSGID=true
 
 [Install]
 WantedBy=multi-user.target
