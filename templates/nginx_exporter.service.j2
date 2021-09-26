@@ -9,7 +9,7 @@ After=network-online.target
 User=nginx_exporter
 Group=nginx_exporter
 ExecReload=/bin/kill -HUP $MAINPID
-ExecStart=/usr/local/bin/nginx_exporter \
+ExecStart=/usr/local/bin/nginx-prometheus-exporter \
     -nginx.scrape-uri=http://localhost:81/stub_status
 
 SyslogIdentifier=nginx_exporter
