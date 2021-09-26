@@ -52,15 +52,4 @@
     owner: "nginx_exporter"
     group: "nginx_exporter"
     mode: "644"
-
-# - name: (sys) enabling nginx_exporter systemd unit file
-#   systemd:
-#     name: "nginx_exporter"
-#     enabled: true
-#     masked: false
-
-# - name: (sys) start nginx_exporter to the moon
-#   systemd:
-#     name: "nginx_exporter"
-#     state: restarted
-#     daemon_reload: true
+  notify: start nginx-exporter

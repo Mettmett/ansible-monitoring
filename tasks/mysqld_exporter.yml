@@ -52,15 +52,4 @@
     owner: "mysqld_exporter"
     group: "mysqld_exporter"
     mode: "644"
-
-# - name: (sys) enabling mysqld_exporter systemd unit file
-#   systemd:
-#     name: "mysqld_exporter"
-#     enabled: true
-#     masked: false
-
-# - name: (sys) start mysqld_exporter to the moon
-#   systemd:
-#     name: "mysqld_exporter"
-#     state: restarted
-#     daemon_reload: true
+  notify: start mysqld-exporter

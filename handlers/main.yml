@@ -31,6 +31,22 @@
     name: "loki"
     state: started
 
+- name: start mysqld-exporter
+  systemd:
+    daemon_reload: true
+    enabled: true
+    masked: false
+    name: "mysqld_exporter"
+    state: started
+
+- name: start nginx-exporter
+  systemd:
+    daemon_reload: true
+    enabled: true
+    masked: false
+    name: "nginx_exporter"
+    state: started
+
 - name: start node-exporter
   systemd:
     daemon_reload: true
