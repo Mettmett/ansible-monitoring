@@ -1,3 +1,11 @@
+---
+- name: start blackbox-exporter
+  systemd:
+    daemon_reload: true
+    enabled: true
+    masked: false
+    name: "blackbox_exporter"
+    state: started
 
 - name: start grafana
   systemd:
