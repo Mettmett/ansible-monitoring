@@ -28,6 +28,13 @@ platforms:
         ip: 192.168.56.10
         netmask: 24
         network_name: private_network
+  - name: monitoring-debian11
+    box: debian/bullseye64
+    interfaces:
+      - auto_config: true
+        ip: 192.168.56.11
+        netmask: 24
+        network_name: private_network
 
 provisioner:
   name: ansible
