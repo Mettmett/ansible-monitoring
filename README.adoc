@@ -6,7 +6,6 @@ Little Ansible role to install a monitoring stack with Prometheus, Grafana, Node
 
 == What remains to be done ?
 
-- use handlers
 - create ansible tags
 - add your value!
 
