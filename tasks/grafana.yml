@@ -46,4 +46,4 @@
     owner: "grafana"
     group: "grafana"
     mode: "0644"
-    notify: start grafana
+  notify: start grafana

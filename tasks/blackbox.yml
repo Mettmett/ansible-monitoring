@@ -82,4 +82,4 @@
     owner: "blackbox_exporter"
     group: "blackbox_exporter"
     mode: "644"
-    notify: start blackbox-exporter
+  notify: start blackbox-exporter

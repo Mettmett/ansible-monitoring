@@ -31,4 +31,4 @@
     owner: "influxdb"
     group: "influxdb"
     mode: "644"
-    notify: start influxdb
+  notify: start influxdb
