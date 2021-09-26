@@ -23,6 +23,14 @@
     name: "influxdb"
     state: started
 
+- name: start loki
+  systemd:
+    daemon_reload: true
+    enabled: true
+    masked: false
+    name: "loki"
+    state: started
+
 - name: start prometheus
   systemd:
     daemon_reload: true
@@ -31,3 +39,10 @@
     name: "prometheus"
     state: started
 
+- name: start promtail
+  systemd:
+    daemon_reload: true
+    enabled: true
+    masked: false
+    name: "promtail"
+    state: started

@@ -100,12 +100,6 @@
   loop:
     - loki
     - promtail
-
-- name: (sys) start loki and promtail to the moon
-  systemd:
-    name: "{{ item }}"
-    state: restarted
-    daemon_reload: true
-  loop:
-    - loki
-    - promtail
+  notify:
+    - start loki
+    - start promtail
