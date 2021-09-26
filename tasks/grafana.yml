@@ -46,15 +46,4 @@
     owner: "grafana"
     group: "grafana"
     mode: "0644"
-
-- name: (sys) enabling grafana-server systemd unit file
-  systemd:
-    name: "grafana-server"
-    enabled: true
-    masked: false
-
-- name: (sys) start grafana-server to the moon
-  systemd:
-    name: "grafana-server"
-    state: restarted
-    daemon_reload: true
+    notify: start grafana
