@@ -45,14 +45,7 @@
     - "/etc/prometheus"
     - "/etc/prometheus/rules"
     - "/etc/prometheus/file_sd"
-
-- name: (build) create the folder for prometheus datas
-  file:
-    path: "/var/lib/prometheus"
-    owner: "prometheus"
-    group: "prometheus"
-    state: directory
-    mode: "0755"
+    - "/var/lib/prometheus"
 
 - name: (build) unpack prometheus sources
   unarchive:

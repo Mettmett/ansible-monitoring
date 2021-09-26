@@ -32,7 +32,7 @@
     createhome: "false"
     home: "/var/lib/blackbox_exporter"
 
-- name: (build) create folders for blackbox_exporter conf files
+- name: (build) create folders for blackbox_exporter
   file:
     path: "{{ item }}"
     state: directory
@@ -41,14 +41,7 @@
     mode: "0755"
   with_items:
     - "/etc/blackbox_exporter"
-
-- name: (build) create the folder for blackbox_exporter datas
-  file:
-    path: "/var/lib/blackbox_exporter"
-    owner: "blackbox_exporter"
-    group: "blackbox_exporter"
-    state: directory
-    mode: "0755"
+    - "/var/lib/blackbox_exporter"
 
 - name: (build) unpack blackbox_exporter sources
   unarchive:
