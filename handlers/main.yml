@@ -1,0 +1,8 @@
+- name: start prometheus
+  systemd:
+    daemon_reload: true
+    enabled: true
+    masked: false
+    name: "prometheus"
+    state: started
+

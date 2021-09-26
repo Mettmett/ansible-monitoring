@@ -99,15 +99,4 @@
     owner: "prometheus"
     group: "prometheus"
     mode: "644"
-
-- name: (sys) enabling prometheus systemd unit file
-  systemd:
-    name: "prometheus"
-    enabled: true
-    masked: false
-
-- name: (sys) start prometheus to the moon
-  systemd:
-    name: "prometheus"
-    state: restarted
-    daemon_reload: true
+  notify: start prometheus
