@@ -41,14 +41,12 @@
     remote_src: true
     src: https://github.com/grafana/loki/releases/download/v{{ loki_version }}/loki-linux-amd64.zip
     dest: /usr/local/bin
-    checksum: sha256:{{ loki_sha256 }}
 
 - name: (sys) download promtail sources (.zip)
   unarchive:
     remote_src: true
     src: https://github.com/grafana/loki/releases/download/v{{ promtail_version }}/promtail-linux-amd64.zip
     dest: /usr/local/bin
-    checksum: sha256:{{ promtail_sha256 }}
 
 - name: (sys) change loki ownership and group
   file:
