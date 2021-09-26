@@ -58,15 +58,4 @@
     owner: "node_exporter"
     group: "node_exporter"
     mode: "644"
-
-- name: (sys) enabling node_exporter systemd unit file
-  systemd:
-    name: "node_exporter"
-    enabled: true
-    masked: false
-
-- name: (sys) start node_exporter to the moon
-  systemd:
-    name: "node_exporter"
-    state: restarted
-    daemon_reload: true
+  notify: start node-exporter

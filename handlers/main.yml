@@ -31,6 +31,14 @@
     name: "loki"
     state: started
 
+- name: start node-exporter
+  systemd:
+    daemon_reload: true
+    enabled: true
+    masked: false
+    name: "node_exporter"
+    state: started
+
 - name: start prometheus
   systemd:
     daemon_reload: true
