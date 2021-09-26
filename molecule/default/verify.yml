@@ -19,7 +19,7 @@
       - promtail.service
 
   - name: (check) Test if services ports are open and reachable
-    shell: "ss -ntlp | grep {{ item }}"
+    shell: "ss -ntlp | grep {{ item }} | sleep 2"
     loop:
       - 3000
       - 8086
