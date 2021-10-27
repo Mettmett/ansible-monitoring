@@ -75,4 +75,11 @@
     owner: "blackbox_exporter"
     group: "blackbox_exporter"
     mode: "644"
-  notify: start blackbox-exporter
+
+- name: (sys) start blackbox-exporter
+  systemd:
+    daemon_reload: true
+    enabled: true
+    masked: false
+    name: "blackbox_exporter"
+    state: started

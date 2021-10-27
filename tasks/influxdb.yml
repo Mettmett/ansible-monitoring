@@ -31,4 +31,11 @@
     owner: "influxdb"
     group: "influxdb"
     mode: "644"
-  notify: start influxdb
+
+- name: (sys) start influxdb service
+  systemd:
+    daemon_reload: true
+    enabled: true
+    masked: false
+    name: "influxdb"
+    state: started

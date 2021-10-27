@@ -92,4 +92,11 @@
     owner: "prometheus"
     group: "prometheus"
     mode: "644"
-  notify: start prometheus
+
+- name: (sys) start prometheus
+  systemd:
+    daemon_reload: true
+    enabled: true
+    masked: false
+    name: "prometheus"
+    state: started

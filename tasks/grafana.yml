@@ -46,4 +46,11 @@
     owner: "grafana"
     group: "grafana"
     mode: "0644"
-  notify: start grafana
+
+- name: (sys) start grafana service
+  systemd:
+    daemon_reload: true
+    enabled: true
+    masked: false
+    name: "grafana-server"
+    state: started

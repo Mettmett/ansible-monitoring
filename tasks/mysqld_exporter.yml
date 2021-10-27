@@ -52,4 +52,3 @@
     owner: "mysqld_exporter"
     group: "mysqld_exporter"
     mode: "644"
-  notify: start mysqld-exporter

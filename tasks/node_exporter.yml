@@ -58,4 +58,11 @@
     owner: "node_exporter"
     group: "node_exporter"
     mode: "644"
-  notify: start node-exporter
+
+- name: (sys) start node-exporter
+  systemd:
+    daemon_reload: true
+    enabled: true
+    masked: false
+    name: "node_exporter"
+    state: started

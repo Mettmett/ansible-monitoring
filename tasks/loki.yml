@@ -92,14 +92,18 @@
     group: "loki"
     mode: "644"
 
-- name: (sys) enabling loki and promtail systemd unit file
+- name: (sys) start loki
   systemd:
-    name: "{{ item }}"
+    daemon_reload: true
     enabled: true
     masked: false
-  loop:
-    - loki
-    - promtail
-  notify:
-    - start loki
-    - start promtail
+    name: "loki"
+    state: started
+
+- name: (sys) start promtail
+  systemd:
+    daemon_reload: true
+    enabled: true
+    masked: false
+    name: "promtail"
+    state: started
