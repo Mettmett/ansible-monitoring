@@ -1,8 +1,4 @@
 ---
-- name: (sys) update host apt cache
-  apt:
-    cache_valid_time: 3600
-    update_cache: true
 
 - name: (sys) download blackbox_exporter archive with check (sha256)
   get_url:

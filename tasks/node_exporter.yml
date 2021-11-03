@@ -1,11 +1,6 @@
 ---
 # based on https://github.com/cloudalchemy/ansible-prometheus
 
-- name: (sys) update host apt cache
-  apt:
-    cache_valid_time: 3600
-    update_cache: true
-
 - name: (sys) download node_exporter archive with check (sha256)
   get_url:
     checksum: sha256:{{ node_exporter_sha256 }}
