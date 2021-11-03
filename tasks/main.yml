@@ -1,23 +1,6 @@
 ---
 # tasks/main.yml
 
-- name: (sys) update host apt cache
-  apt:
-    update_cache: true
-    cache_valid_time: 3600
-
-- name: (sys) install sys tools
-  apt:
-    name: "{{ item }}"
-    state: present
-    install_recommends: false
-  loop:
-    - wget
-    - libfontconfig1
-
-- name: (sys) install InfluxDB
-  include_tasks: "influxdb.yml"
-
 - name: (sys) install Grafana
   include_tasks: "grafana.yml"
 
