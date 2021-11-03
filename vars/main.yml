@@ -1,12 +1,12 @@
 ---
 
 # specific grafana
-grafana_version: "8.1.5"
-grafana_sha256: "3512041e3ff6adbd34a1c1823e29f6e149e5102db31b429238a69d40c32eda5f"
+grafana_version: "8.2.3"
+grafana_sha256: "766e1fee51084af23f09022f82aa13baf44f75d40d68710ef9fda5a15da0ac25"
 
 # specific prometheus
-prometheus_version: "2.30.0"
-prometheus_sha256: "49c0809d4983f91c9afb8d260b36b821e90a6dcb82d0bad605ff9a3102a9e6d8"
+prometheus_version: "2.31.0"
+prometheus_sha256: "cd92e35b356d35cbe44f32f54ca9a7687c885f4367587ac208a1803ed16572aa"
 
 # specific node_exporter
 node_exporter_version: "1.2.2"
