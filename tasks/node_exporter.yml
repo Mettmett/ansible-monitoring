@@ -17,21 +17,21 @@
   file:
     path: "/tmp/node_exporter/{{ node_exporter_version }}"
     state: directory
-    mode: "0755"
+    mode: 0755
 
 - name: (sys) create node_exporter system group
   group:
     name: "node_exporter"
-    system: "true"
+    system: true
     state: present
 
 - name: (sys) create node_exporter system user
   user:
     name: "node_exporter"
-    system: "true"
+    system: true
     shell: "/usr/sbin/nologin"
     group: "node_exporter"
-    createhome: "false"
+    createhome: false
     home: "/tmp/"
 
 - name: (build) unpack node_exporter sources
@@ -45,7 +45,7 @@
     remote_src: true
     src: "/tmp/node_exporter/{{ node_exporter_version }}/node_exporter-{{ node_exporter_version }}.linux-amd64/{{ item }}"
     dest: "/usr/local/bin/{{ item }}"
-    mode: "0755"
+    mode: 0755
     owner: "node_exporter"
     group: "node_exporter"
   with_items:
@@ -57,7 +57,7 @@
     dest: "/lib/systemd/system/node_exporter.service"
     owner: "node_exporter"
     group: "node_exporter"
-    mode: "644"
+    mode: 0644
 
 - name: (sys) start node-exporter
   systemd:

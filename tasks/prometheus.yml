@@ -17,21 +17,21 @@
   file:
     path: "/tmp/prometheus/{{ prometheus_version }}"
     state: directory
-    mode: "0755"
+    mode: 0755
 
 - name: (sys) create prometheus system group
   group:
     name: "prometheus"
-    system: "true"
+    system: true
     state: present
 
 - name: (sys) create prometheus system user
   user:
     name: "prometheus"
-    system: "true"
+    system: true
     shell: "/usr/sbin/nologin"
     group: "prometheus"
-    createhome: "false"
+    createhome: false
     home: "/var/lib/prometheus"
 
 - name: (build) create folders for prometheus conf files
@@ -40,7 +40,7 @@
     state: directory
     owner: "prometheus"
     group: "prometheus"
-    mode: "0755"
+    mode: 0755
   with_items:
     - "/etc/prometheus"
     - "/etc/prometheus/rules"
@@ -58,7 +58,7 @@
     remote_src: true
     src: "/tmp/prometheus/{{ prometheus_version }}/prometheus-{{ prometheus_version }}.linux-amd64/{{ item }}"
     dest: "/usr/local/bin/{{ item }}"
-    mode: "0755"
+    mode: 0755
     owner: "prometheus"
     group: "prometheus"
   with_items:
@@ -70,7 +70,7 @@
     remote_src: true
     src: "/tmp/prometheus/{{ prometheus_version }}/prometheus-{{ prometheus_version }}.linux-amd64/{{ item }}"
     dest: "/etc/prometheus/{{ item }}"
-    mode: "0644"
+    mode: 0644
     owner: "prometheus"
     group: "prometheus"
   with_items:
@@ -83,7 +83,7 @@
     dest: "/etc/prometheus/prometheus.yml"
     owner: "prometheus"
     group: "prometheus"
-    mode: "644"
+    mode: 0644
 
 - name: (build) installing systemd unit
   template:
@@ -91,7 +91,7 @@
     dest: "/lib/systemd/system/prometheus.service"
     owner: "prometheus"
     group: "prometheus"
-    mode: "644"
+    mode: 0644
 
 - name: (sys) start prometheus
   systemd:

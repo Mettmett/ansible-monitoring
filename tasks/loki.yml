@@ -7,32 +7,30 @@
 
 - name: (sys) install sys tools
   apt:
-    name: "{{ item }}"
+    name: "unzip"
     state: present
     install_recommends: false
-  loop:
-    - unzip
 
 - name: (sys) create loki system group
   group:
     name: "loki"
-    system: "true"
+    system: true
     state: present
 
 - name: (sys) create loki system user
   user:
     name: "loki"
-    system: "true"
+    system: true
     shell: "/usr/sbin/nologin"
     group: "loki"
-    createhome: "false"
+    createhome: false
     home: "/etc/loki"
 
 - name: (build) create a folder to stock loki and promtail conf files
   file:
     path: "/etc/loki"
     state: directory
-    mode: "0755"
+    mode: 0755
     owner: "loki"
     group: "loki"
 
@@ -66,7 +64,7 @@
     dest: "/etc/loki/loki-config.yml"
     owner: "loki"
     group: "loki"
-    mode: "644"
+    mode: 0644
 
 - name: (build) installing custom conf file for promtail
   template:
@@ -74,7 +72,7 @@
     dest: "/etc/loki/promtail-config.yml"
     owner: "loki"
     group: "loki"
-    mode: "644"
+    mode: 0644
 
 - name: (build) installing loki systemd unit
   template:
@@ -82,7 +80,7 @@
     dest: "/lib/systemd/system/loki.service"
     owner: "loki"
     group: "loki"
-    mode: "644"
+    mode: 0644
 
 - name: (build) installing promtail systemd unit
   template:
@@ -90,7 +88,7 @@
     dest: "/lib/systemd/system/promtail.service"
     owner: "loki"
     group: "loki"
-    mode: "644"
+    mode: 0644
 
 - name: (sys) start loki
   systemd:

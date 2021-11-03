@@ -11,21 +11,21 @@
   file:
     path: "/tmp/mysqld_exporter/{{ mysqld_exporter_version }}"
     state: directory
-    mode: "0755"
+    mode: 0755
 
 - name: (sys) create mysqld_exporter system group
   group:
     name: "mysqld_exporter"
-    system: "true"
+    system: true
     state: present
 
 - name: (sys) create mysqld_exporter system user
   user:
     name: "mysqld_exporter"
-    system: "true"
+    system: true
     shell: "/usr/sbin/nologin"
     group: "mysqld_exporter"
-    createhome: "false"
+    createhome: false
     home: "/tmp/"
 
 - name: (build) unpack mysqld_exporter sources
@@ -39,7 +39,7 @@
     remote_src: true
     src: "/tmp/mysqld_exporter/{{ mysqld_exporter_version }}/mysqld_exporter-{{ mysqld_exporter_version }}.linux-amd64/{{ item }}"
     dest: "/usr/local/bin/{{ item }}"
-    mode: "0755"
+    mode: 0755
     owner: "mysqld_exporter"
     group: "mysqld_exporter"
   with_items:
@@ -51,4 +51,4 @@
     dest: "/lib/systemd/system/mysqld_exporter.service"
     owner: "mysqld_exporter"
     group: "mysqld_exporter"
-    mode: "644"
+    mode: 0644

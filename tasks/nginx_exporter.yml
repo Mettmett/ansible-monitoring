@@ -11,21 +11,21 @@
   file:
     path: "/tmp/nginx_exporter/{{ nginx_exporter_version }}"
     state: directory
-    mode: "0755"
+    mode: 0755
 
 - name: (sys) create nginx_exporter system group
   group:
     name: "nginx_exporter"
-    system: "true"
+    system: true
     state: present
 
 - name: (sys) create nginx_exporter system user
   user:
     name: "nginx_exporter"
-    system: "true"
+    system: true
     shell: "/usr/sbin/nologin"
     group: "nginx_exporter"
-    createhome: "false"
+    createhome: false
     home: "/tmp/"
 
 - name: (build) unpack nginx_exporter sources
@@ -39,7 +39,7 @@
     remote_src: true
     src: "/tmp/nginx_exporter/{{ nginx_exporter_version }}/{{ item }}"
     dest: "/usr/local/bin/{{ item }}"
-    mode: "0755"
+    mode: 0755
     owner: "nginx_exporter"
     group: "nginx_exporter"
   with_items:
@@ -51,4 +51,4 @@
     dest: "/lib/systemd/system/nginx_exporter.service"
     owner: "nginx_exporter"
     group: "nginx_exporter"
-    mode: "644"
+    mode: 0644

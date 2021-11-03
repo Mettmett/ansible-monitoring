@@ -30,7 +30,7 @@
     dest: "/etc/grafana/provisioning/datasources/grafana-ds-prometheus.yml"
     owner: "grafana"
     group: "grafana"
-    mode: "644"
+    mode: 0644
 
 - name: (sys) installing custom grafana configuration file
   template:
@@ -38,14 +38,14 @@
     dest: "/etc/grafana/grafana.ini"
     owner: "grafana"
     group: "grafana"
-    mode: "644"
+    mode: 0644
 
 - name: (sys) change file ownership group and permissions of systemd unit
   file:
     path: /lib/systemd/system/grafana-server.service
     owner: "grafana"
     group: "grafana"
-    mode: "0644"
+    mode: 0644
 
 - name: (sys) start grafana service
   systemd:
