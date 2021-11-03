@@ -11,8 +11,8 @@
     name: "{{ item }}"
     state: present
   loop:
-    - wget
     - libfontconfig1
+    - wget
 
 - name: (sys) download grafana deb with check (sha256)
   get_url:
