@@ -1,9 +1,5 @@
 ---
 
-# specific influxdb
-influxdb_version: "2.0.8"
-influxdb_sha256: "39d195d6cf1f8beb731299c8805bae25effcdfdfb851c21857dddf954445220c"
-
 # specific grafana
 grafana_version: "8.1.5"
 grafana_sha256: "3512041e3ff6adbd34a1c1823e29f6e149e5102db31b429238a69d40c32eda5f"
