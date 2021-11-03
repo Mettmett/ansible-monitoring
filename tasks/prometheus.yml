@@ -3,44 +3,44 @@
 
 - name: (sys) update host apt cache
   apt:
-    update_cache: true
     cache_valid_time: 3600
+    update_cache: true
 
 - name: (sys) download prometheus archive with check (sha256)
   get_url:
-    url: https://github.com/prometheus/prometheus/releases/download/v{{ prometheus_version }}/prometheus-{{ prometheus_version }}.linux-amd64.tar.gz
-    dest: /tmp/prometheus-{{ prometheus_version }}.linux-amd64.tar.gz
     checksum: sha256:{{ prometheus_sha256 }}
+    dest: /tmp/prometheus-{{ prometheus_version }}.linux-amd64.tar.gz
+    url: https://github.com/prometheus/prometheus/releases/download/v{{ prometheus_version }}/prometheus-{{ prometheus_version }}.linux-amd64.tar.gz
   register: prometheus_source
 
 - name: (build) create a temp folder for prometheus sources
   file:
+    mode: 0755
     path: "/tmp/prometheus/{{ prometheus_version }}"
     state: directory
-    mode: 0755
 
 - name: (sys) create prometheus system group
   group:
     name: "prometheus"
-    system: true
     state: present
+    system: true
 
 - name: (sys) create prometheus system user
   user:
-    name: "prometheus"
-    system: true
-    shell: "/usr/sbin/nologin"
-    group: "prometheus"
     createhome: false
+    group: "prometheus"
     home: "/var/lib/prometheus"
+    name: "prometheus"
+    shell: "/usr/sbin/nologin"
+    system: true
 
 - name: (build) create folders for prometheus conf files
   file:
-    path: "{{ item }}"
-    state: directory
-    owner: "prometheus"
     group: "prometheus"
     mode: 0755
+    owner: "prometheus"
+    path: "{{ item }}"
+    state: directory
   with_items:
     - "/etc/prometheus"
     - "/etc/prometheus/rules"
@@ -55,43 +55,43 @@
 
 - name: (build) copy binaries to system
   copy:
-    remote_src: true
-    src: "/tmp/prometheus/{{ prometheus_version }}/prometheus-{{ prometheus_version }}.linux-amd64/{{ item }}"
     dest: "/usr/local/bin/{{ item }}"
+    group: "prometheus"
     mode: 0755
     owner: "prometheus"
-    group: "prometheus"
+    remote_src: true
+    src: "/tmp/prometheus/{{ prometheus_version }}/prometheus-{{ prometheus_version }}.linux-amd64/{{ item }}"
   with_items:
     - prometheus
     - promtool
 
 - name: (build) copy prometheus console files to system
   copy:
-    remote_src: true
-    src: "/tmp/prometheus/{{ prometheus_version }}/prometheus-{{ prometheus_version }}.linux-amd64/{{ item }}"
     dest: "/etc/prometheus/{{ item }}"
+    group: "prometheus"
     mode: 0644
     owner: "prometheus"
-    group: "prometheus"
+    remote_src: true
+    src: "/tmp/prometheus/{{ prometheus_version }}/prometheus-{{ prometheus_version }}.linux-amd64/{{ item }}"
   with_items:
-    - console_libraries
     - consoles
+    - console_libraries
 
 - name: (build) installing prometheus default configuration file
   template:
-    src: "prometheus.yml.j2"
     dest: "/etc/prometheus/prometheus.yml"
-    owner: "prometheus"
     group: "prometheus"
     mode: 0644
+    owner: "prometheus"
+    src: "prometheus.yml.j2"
 
 - name: (build) installing systemd unit
   template:
-    src: "prometheus.service.j2"
     dest: "/lib/systemd/system/prometheus.service"
-    owner: "prometheus"
     group: "prometheus"
     mode: 0644
+    owner: "prometheus"
+    src: "prometheus.service.j2"
 
 - name: (sys) start prometheus
   systemd:

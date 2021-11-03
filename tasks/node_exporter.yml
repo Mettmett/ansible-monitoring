@@ -3,36 +3,36 @@
 
 - name: (sys) update host apt cache
   apt:
-    update_cache: true
     cache_valid_time: 3600
+    update_cache: true
 
 - name: (sys) download node_exporter archive with check (sha256)
   get_url:
-    url: https://github.com/prometheus/node_exporter/releases/download/v{{ node_exporter_version }}/node_exporter-{{ node_exporter_version }}.linux-amd64.tar.gz
-    dest: /tmp/node_exporter-{{ node_exporter_version }}.linux-amd64.tar.gz
     checksum: sha256:{{ node_exporter_sha256 }}
+    dest: /tmp/node_exporter-{{ node_exporter_version }}.linux-amd64.tar.gz
+    url: https://github.com/prometheus/node_exporter/releases/download/v{{ node_exporter_version }}/node_exporter-{{ node_exporter_version }}.linux-amd64.tar.gz
   register: node_exporter_source
 
 - name: (build) create a temp folder for node_exporter sources
   file:
+    mode: 0755
     path: "/tmp/node_exporter/{{ node_exporter_version }}"
     state: directory
-    mode: 0755
 
 - name: (sys) create node_exporter system group
   group:
     name: "node_exporter"
-    system: true
     state: present
+    system: true
 
 - name: (sys) create node_exporter system user
   user:
-    name: "node_exporter"
-    system: true
-    shell: "/usr/sbin/nologin"
-    group: "node_exporter"
     createhome: false
+    group: "node_exporter"
     home: "/tmp/"
+    name: "node_exporter"
+    shell: "/usr/sbin/nologin"
+    system: true
 
 - name: (build) unpack node_exporter sources
   unarchive:
@@ -42,22 +42,22 @@
 
 - name: (build) copy binaries to system
   copy:
-    remote_src: true
-    src: "/tmp/node_exporter/{{ node_exporter_version }}/node_exporter-{{ node_exporter_version }}.linux-amd64/{{ item }}"
     dest: "/usr/local/bin/{{ item }}"
+    group: "node_exporter"
     mode: 0755
     owner: "node_exporter"
-    group: "node_exporter"
+    remote_src: true
+    src: "/tmp/node_exporter/{{ node_exporter_version }}/node_exporter-{{ node_exporter_version }}.linux-amd64/{{ item }}"
   with_items:
     - node_exporter
 
 - name: (build) installing systemd unit
   template:
-    src: "node_exporter.service.j2"
     dest: "/lib/systemd/system/node_exporter.service"
-    owner: "node_exporter"
     group: "node_exporter"
     mode: 0644
+    owner: "node_exporter"
+    src: "node_exporter.service.j2"
 
 - name: (sys) start node-exporter
   systemd:
