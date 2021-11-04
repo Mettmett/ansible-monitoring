@@ -12,7 +12,6 @@
     loop:
       - blackbox_exporter.service
       - grafana-server.service
-      - influxdb.service
       - loki.service
       - node_exporter.service
       - prometheus.service
