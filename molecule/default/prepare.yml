@@ -6,8 +6,8 @@
   tasks:
     - name: (sys) update host apt cache
       apt:
-        update_cache: true
         cache_valid_time: 3600
+        update_cache: true
 
     - name: (sys) install sys tools
       apt:
@@ -15,11 +15,11 @@
         state: present
         install_recommends: false
       loop:
-        - tar
-        - unzip
         - curl
         - git
         - rsync
+        - tar
+        - unzip
         - wget
 
     - name: python3-minimal for ansible
