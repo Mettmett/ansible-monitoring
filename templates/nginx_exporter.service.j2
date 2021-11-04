@@ -8,7 +8,7 @@ Documentation=https://github.com/nginxinc/nginx-prometheus-exporter
 [Service]
 ExecReload=/bin/kill -HUP $MAINPID
 ExecStart=/usr/local/bin/nginx-prometheus-exporter \
-    -nginx.scrape-uri=http://localhost:81/stub_status
+    -nginx.scrape-uri=http://{{ nginx_uri_status }}
 Group=nginx_exporter
 Restart=on-failure
 SyslogIdentifier=nginx_exporter

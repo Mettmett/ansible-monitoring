@@ -39,6 +39,7 @@
       vars:
         nginx_exporter_version: "0.9.0"
         nginx_exporter_sha256: "469851e5705a83e9bba9eb402a7484d196293826470f4f66b1d2a4a1074b6599"
+        nginx_uri_status: "localhost:81/stub_status"
       tags: install_nginx_exporter
 
     - name: (sys) install node_exporter
