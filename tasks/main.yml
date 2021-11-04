@@ -1,0 +1,57 @@
+---
+
+- name: (sys) install blackbox_exporter
+  import_tasks: "tasks/blackbox.yml"
+  vars:
+    blackbox_exporter_version: "0.19.0"
+    blackbox_exporter_sha256: "af2ae1394c4f9b46962ac1510e1dacac78115c11e625991fb6c54825d2240896"
+  tags: install_blackbox
+
+- name: (sys) install Grafana
+  import_tasks: "tasks/grafana.yml"
+  vars:
+    grafana_version: "8.2.3"
+    grafana_sha256: "766e1fee51084af23f09022f82aa13baf44f75d40d68710ef9fda5a15da0ac25"
+  tags: install_grafana
+
+- name: (sys) install Loki and promtail
+  import_tasks: "tasks/lokipromtail.yml"
+  vars:
+    loki_version: "2.3.0"
+    loki_sha256: "e3cfcdd67fc23f2707eea64b200eada2d8d12864a7052b9482d56fdeae989b3c"
+    promtail_version: "2.2.1"
+    promtail_sha256: "9ca9f0bf63bec77664d3b62110107d2430c43137943a70713c6f11fa23d48130"
+  tags: install_loki_promtail
+
+- name: (sys) install mysql-exporter
+  import_tasks: "tasks/mysqld_exporter.yml"
+  vars:
+    mysqld_exporter_dbhost: "localhost"
+    mysqld_exporter_dbpassword: "pouetpouet"
+    mysqld_exporter_dbport: 3306
+    mysqld_exporter_dbuser: "exporter"
+    mysqld_exporter_version: "0.13.0"
+    mysqld_exporter_sha256: "626584c5d1c0cf09982302763e69db24fabe5dc736e7b694a3f8fdfee3d8d9a2"
+  tags: install_mysqld_exporter
+
+- name: (sys) install nginx-exporter
+  import_tasks: "tasks/nginx_exporter.yml"
+  vars:
+    nginx_exporter_version: "0.9.0"
+    nginx_exporter_sha256: "469851e5705a83e9bba9eb402a7484d196293826470f4f66b1d2a4a1074b6599"
+    nginx_uri_status: "localhost:81/stub_status"
+  tags: install_nginx_exporter
+
+- name: (sys) install node_exporter
+  import_tasks: "tasks/node_exporter.yml"
+  vars:
+    node_exporter_version: "1.2.2"
+    node_exporter_sha256: "344bd4c0bbd66ff78f14486ec48b89c248139cdd485e992583ea30e89e0e5390"
+  tags: install_node_exporter
+
+- name: (sys) install Prometheus
+  import_tasks: "tasks/prometheus.yml"
+  vars:
+    prometheus_version: "2.31.0"
+    prometheus_sha256: "cd92e35b356d35cbe44f32f54ca9a7687c885f4367587ac208a1803ed16572aa"
+  tags: install_prometheus
