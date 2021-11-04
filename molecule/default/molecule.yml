@@ -25,6 +25,8 @@ provisioner:
   name: ansible
   lint:
     name: ansible-lint
+  playbooks:
+    converge: ../../play.yml
 
 scenario:
   name: default
