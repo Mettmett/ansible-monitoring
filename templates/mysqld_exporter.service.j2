@@ -6,7 +6,7 @@ Description=MySQLd exporter Daemon
 Documentation=https://github.com/prometheus/mysqld_exporter
 
 [Service]
-Environment=DATA_SOURCE_NAME='export:pouetpouet@(localhost:3306)/'
+Environment=DATA_SOURCE_NAME='{{ mysqld_exporter_dbuser }}:{{ mysqld_exporter_dbpassword }}@({{ mysqld_exporter_dbhost }}:{{ mysqld_exporter_dbport }})/'
 ExecReload=/bin/kill -HUP $MAINPID
 ExecStart=/usr/local/bin/mysqld_exporter \
     --collect.auto_increment.columns \

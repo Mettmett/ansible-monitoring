@@ -30,6 +30,10 @@
     - name: (sys) install mysql-exporter
       import_tasks: "tasks/mysqld_exporter.yml"
       vars:
+        mysqld_exporter_dbhost: "localhost"
+        mysqld_exporter_dbpassword: "pouetpouet"
+        mysqld_exporter_dbport: 3306
+        mysqld_exporter_dbuser: "exporter"
         mysqld_exporter_version: "0.13.0"
         mysqld_exporter_sha256: "626584c5d1c0cf09982302763e69db24fabe5dc736e7b694a3f8fdfee3d8d9a2"
       tags: install_mysqld_exporter
