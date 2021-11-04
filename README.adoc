@@ -4,14 +4,13 @@
 
 Little Ansible role to install a monitoring stack with Prometheus, Grafana, Node-Exporter, Loki (with promtail), Telegraf and InfluxDB.
 
-== What remains to be done ?
-
-- create ansible tags
-- add your value!
-
 == Vars
 
-Some variables are used in the file `main.yml`.
+Some variables are used in the file `play.yml`. They're here to be used with molecule easily. You can surcharge them in your playbook.
+
+== Blackbox_Exporter
+
+Stock configuration, no options or tweaks used.
 
 == Grafana
 
@@ -32,41 +31,46 @@ Have some metrics easily of your host with this package. No tweaks, simple use.
 
 Used to view logs into Grafana. Default configuration used.
 
+== Nginx_Exporter
+
+Stock configuration, no options or tweaks used. Scrape by default `http://localhost:81/stub_status` (can be changed with the vars `nginx_uri_status`)
+
+== MysqlD_Exporter
+
+Stock configuration, no options or tweaks used. Variables are used to specify the user able to connect to your SQL server and operate on it (SELECT on performance_schema)
+
 == How to use it ?
 
 === Test it with molecule
 
 Simple ! Use the venv.sh script to enter to the matrix (c).
 
-```bash
+[source,bash]
+----
 source venv.sh
-```
+----
 
-This virtualenv will bring you needed tools. You will in the virtualenv automatically. You are now ready to create virtual machines.
+This virtualenv will bring you needed tools. You will in the virtualenv automatically. You are now ready to create virtual machines and then use the playbook. 
 
-```bash
-molecule create
-```
-
-And then use the playbook
-
-```bash
-molecule converge
-```
+[source,bash]
+----
+molecule create && molecule converge
+----
 
 When you're all set, destroy it.
 
-```bash
+[source,bash]
+----
 molecule destroy
-```
+----
 
 === Use this role in another ansible playbook
 
 Incorpore this role on your playbook and go ! Add this block on your `requirements.yml`
 
-```bash
----
+[source,bash]
+----
 roles:
   - src: git@github.com:Mettmett/ansible-monitoring.git
     scm: git
-```
+----
